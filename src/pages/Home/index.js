@@ -1,19 +1,28 @@
+import { useData } from "../../contexts/DataContext";
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
 import EventCard from "../../components/EventCard";
 import PeopleCard from "../../components/PeopleCard";
-
-import "./style.scss";
 import EventList from "../../containers/Events";
 import Slider from "../../containers/Slider";
 import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
-import { useData } from "../../contexts/DataContext";
+
+import "./style.scss";
 
 const Page = () => {
-  const { last } = useData();
+  const { data } = useData();
+  let firstData = null;
+
+  if (data?.events && data.events.length > 0) {
+    const [firstEvent] = data.events.sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
+    firstData = firstEvent;
+  }
+
   return (
     <>
       <header>
@@ -114,13 +123,15 @@ const Page = () => {
       <footer className="row">
         <div className="col presta">
           <h3>Notre derniére prestation</h3>
-          <EventCard
-            imageSrc={last?.cover}
-            title={last?.title}
-            date={new Date(last?.date)}
-            small
-            label="boom"
-          />
+          {firstData && (
+            <EventCard
+              imageSrc={firstData?.cover}
+              title={firstData?.title}
+              date={new Date(firstData?.date)}
+              small
+              label={firstData?.type}
+            />
+          )}
         </div>
         <div className="col contact">
           <h3>Contactez-nous</h3>

@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { useData } from "../../contexts/DataContext";
 import EventCard from "../../components/EventCard";
 import Select from "../../components/Select";
-import { useData } from "../../contexts/DataContext";
 import Modal from "../Modal";
 import ModalEvent from "../ModalEvent";
 
@@ -10,8 +10,9 @@ import "./style.css";
 const PER_PAGE = 9;
 
 const EventList = () => {
-  const { data, error } = useData();
+  const { data, error } = useData()
   const [type, setType] = useState();
+
   const [currentPage, setCurrentPage] = useState(1);
   const filteredEvents = ((!type ? data?.events : data?.events) || []).filter(
     (event, index) => {
@@ -56,6 +57,7 @@ const EventList = () => {
                 )}
               </Modal>
             ))}
+
           </div>
           <div className="Pagination">
             {[...Array(pageNumber || 0)].map((_, n) => (

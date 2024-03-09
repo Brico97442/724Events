@@ -12,8 +12,10 @@ const DataContext = createContext({});
 export const api = {
   loadData: async () => {
     const json = await fetch("/events.json");
+    
     return json.json();
   },
+  
 };
 
 export const DataProvider = ({ children }) => {
