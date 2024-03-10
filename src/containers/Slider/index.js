@@ -11,7 +11,6 @@ const Slider = () => {
     new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
   );
 
-
   const nextCard = () => {
     if (byDateDesc && byDateDesc.length) {
       setTimeout(
@@ -35,11 +34,10 @@ const Slider = () => {
     setIndex(radioIdx);
   };
 
-  
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <div key={generateKeyNb()}>
+        <div key={generateKeyNb(idx)}>
           <div
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
@@ -51,7 +49,6 @@ const Slider = () => {
                 <h3>{event.title}</h3>
                 <p>{event.description}</p>
                 <div>{getMonth(new Date(event.date))}</div>
-              
               </div>
             </div>
           </div>
