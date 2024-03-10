@@ -30,9 +30,9 @@ const Slider = () => {
     return keyNumber.toString();
   };
 
-  const handleRadioChange = (radioIdx) => {
-    setIndex(radioIdx);
-  };
+  // const handleRadioChange = (radioIdx) => {
+  //   setIndex(radioIdx);
+  // };
 
   return (
     <div className="SlideCardList">
@@ -60,7 +60,7 @@ const Slider = () => {
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx}
-                  onChange={() => handleRadioChange(radioIdx)}
+                  readOnly
                 />
               ))}
             </div>
