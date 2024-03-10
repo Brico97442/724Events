@@ -8,7 +8,7 @@ const mockContactApi = () =>
   new Promise((resolve) => {
     setTimeout(resolve, 900);
   });
-console.log(mockContactApi);
+  
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
 
