@@ -25,7 +25,6 @@ const EventList = () => {
     }
 
   );
-  console.log(filteredEvents)
 
   const changeType = (evtType) => {
     setCurrentPage(1);
