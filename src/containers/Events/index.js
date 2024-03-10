@@ -10,27 +10,30 @@ import "./style.css";
 const PER_PAGE = 9;
 
 const EventList = () => {
-  const { data, error } = useData()
-  const [type, setType] = useState();
-
+  const { data, error } = useData();
+  const [type, setType] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const filteredEvents = ((!type ? data?.events : data?.events) || []).filter(
-    (event, index) => {
-      if (
-        (currentPage - 1) * PER_PAGE <= index &&
-        PER_PAGE * currentPage > index
-      ) {
-        return true;
-      }
-      return false;
+  
+  const filteredEvents = (data?.events || []).filter(
+  (event, index,) => {
+    return (
+      (!type || event.type === type) && // Vérifie si le type est sélectionné et correspond à l'événement
+      (currentPage - 1) * PER_PAGE <= index &&
+      PER_PAGE * currentPage > index
+    );;
+      
     }
+
   );
+  console.log(filteredEvents)
+
   const changeType = (evtType) => {
     setCurrentPage(1);
-    setType(evtType);
+    setType(evtType === null ? "" : evtType); // Mettre à jour le type seulement si une option est sélectionnée
   };
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
   const typeList = new Set(data?.events.map((event) => event.type));
+
   return (
     <>
       {error && <div>An error occured</div>}
@@ -45,7 +48,7 @@ const EventList = () => {
           />
           <div id="events" className="ListContainer">
             {filteredEvents.map((event) => (
-              <Modal key={event.id} Content={<ModalEvent event={event} />}>
+              <Modal key={event.id} Content={<ModalEvent event={type} />}>
                 {({ setIsOpened }) => (
                   <EventCard
                     onClick={() => setIsOpened(true)}
@@ -53,11 +56,11 @@ const EventList = () => {
                     title={event.title}
                     date={new Date(event.date)}
                     label={event.type}
+                    
                   />
-                )}
+                )}               
               </Modal>
             ))}
-
           </div>
           <div className="Pagination">
             {[...Array(pageNumber || 0)].map((_, n) => (
