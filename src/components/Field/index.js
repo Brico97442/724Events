@@ -32,7 +32,8 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
           data-testid="field-testid"
         />
       );
-  }
+  }  
+
   return (
     <div className="inputField">
       <span>{label}</span>

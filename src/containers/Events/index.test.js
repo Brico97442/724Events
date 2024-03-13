@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { api, DataProvider } from "../../contexts/DataContext";
 import Events from "./index";
 
+
 const data = {
   events: [
     {
@@ -39,13 +40,13 @@ const data = {
 
 describe("When Events is created", () => {
   it("a list of event card is displayed", async () => {
-    api.loadData = jest.fn().mockReturnValue(data);
+    api.loadData = jest.fn().mockReturnValue(data); // les données sont mockées et corresponde  à la constante data //
     render(
       <DataProvider>
         <Events />
       </DataProvider>
     );
-    await screen.findByText("avril");
+    expect (await screen.findByText("avril")).toBeInTheDocument();
   });
   describe("and an error occured", () => {
     it("an error message is displayed", async () => {

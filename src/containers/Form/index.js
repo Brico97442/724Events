@@ -45,7 +45,7 @@ const Form = ({ onSuccess, onError }) => {
         </div>
         <div className="col">
           <Field
-            placeholder="message"
+            placeholder="message" 
             label="Message"
             type={FIELD_TYPES.TEXTAREA}
           />
