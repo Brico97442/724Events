@@ -14,15 +14,15 @@ import "./style.scss";
 
 const Page = () => {
   const { data } = useData();
-  let firstData = null;
-
+  let lastData = null;
+  
   if (data?.events && data.events.length > 0) {
     const [firstEvent] = data.events.sort(
       (a, b) => new Date(b.date) - new Date(a.date)
     );
-    firstData = firstEvent;
+    lastData = firstEvent;
+    
   }
-
   return (
     <>
       <header>
@@ -123,13 +123,13 @@ const Page = () => {
       <footer className="row">
         <div className="col presta">
           <h3>Notre derniére prestation</h3>
-          {firstData && (
+          {lastData && (
             <EventCard
-              imageSrc={firstData?.cover}
-              title={firstData?.title}
-              date={new Date(firstData?.date)}
+              imageSrc={lastData?.cover}
+              title={lastData?.title}
+              date={new Date(lastData?.date)}
               small
-              label={firstData?.type}
+              label={lastData?.type}
             />
           )}
         </div>

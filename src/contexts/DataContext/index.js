@@ -19,7 +19,7 @@ export const api = {
 };
 
 export const DataProvider = ({ children }) => {
-  const [error, setError] = useState(null);
+  const [error, setError,] = useState(null);
   const [data, setData] = useState(null);
   const getData = useCallback(async () => {
     try {

@@ -30,10 +30,6 @@ const Slider = () => {
     return keyNumber.toString();
   };
 
-  // const handleRadioChange = (radioIdx) => {
-  //   setIndex(radioIdx);
-  // };
-
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
